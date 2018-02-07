@@ -11,6 +11,7 @@ module.exports = {
       database : 'knex_shopping',
       charset: 'utf8',
     },
+    
     migrations: {
       tableName: 'knex_migrations',
       directory: __dirname + '/knex/migrations'
@@ -18,6 +19,8 @@ module.exports = {
     seeds: {
       directory: __dirname + '/knex/seeds'
     }
+   
+
   },
 
   staging: {
