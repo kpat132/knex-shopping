@@ -4,8 +4,7 @@ const knex = require("../knex/knex.js");
 
 router.get(`/:id`, (req, res) => {
   let id = req.params.id;
-  return knex
-    .raw(`SELECT * FROM users WHERE users.id = (?)`, [id])
+  return knex.raw(`SELECT * FROM users WHERE users.id = (?)`, [id])
     .then(result => {
       res.json(result.rows[0]);
     })
@@ -16,8 +15,7 @@ router.get(`/:id`, (req, res) => {
 router.post(`/login`, (req, res) => {
   let email = req.body.email;
   let password = req.body.password;
-  return knex
-    .raw(`SELECT * FROM users WHERE users.email = ?`, [email])
+  return knex.raw(`SELECT * FROM users WHERE users.email = ?`, [email])
     .then(result => {
       return result.rows[0];
     })
@@ -42,8 +40,7 @@ router.post(`/register`, (req, res) => {
   //email = email.toLowerCase();
   let email = req.body.email;
   let password = req.body.password;
-  return knex
-    .raw(`SELECT users.email FROM users WHERE users.email = ?`, [email])
+  return knex.raw(`SELECT users.email FROM users WHERE users.email = ?`, [email])
     .then(result => {
       if (result.rows.length) {
         throw new Error("User already exists");
@@ -52,8 +49,7 @@ router.post(`/register`, (req, res) => {
       }
     })
     .then(result => {
-      return knex.raw(
-        `insert into users(email, password) values(?,?) RETURNING *`,
+      return knex.raw(`insert into users(email, password) values(?,?) RETURNING *`,
         [email, password]
       );
     })
@@ -67,8 +63,7 @@ router.post(`/register`, (req, res) => {
 router.put("/:id/forgot-password", (req, res) => {
   let id = req.params.id;
   let newPass = req.body.password;
-  return knex
-    .raw(`UPDATE users SET password = ? WHERE id = ?`, [newPass, id])
+  return knex.raw(`UPDATE users SET password = ? WHERE id = ?`, [newPass, id])
 
     .then(result => {
       res.json({ message: "New password created!" });

@@ -18,9 +18,8 @@ module.exports = {
     },
     seeds: {
       directory: __dirname + '/knex/seeds'
-    }
-   
-
+    },
+    //debug:true
   },
 
   staging: {
